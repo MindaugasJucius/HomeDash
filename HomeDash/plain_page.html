@@ -233,7 +233,7 @@
         function submitUserInfo(name) {
             userInfoAvailable = true;
             userFullName = name;
-            document.userFullName = name;
+            localStorage.setItem('userFullName', name);
             updateElementVisibility();
         }
     </script>
