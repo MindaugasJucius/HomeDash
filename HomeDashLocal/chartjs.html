@@ -241,7 +241,7 @@
                 dataType: 'json'
             });
 
-            $.post( "localhost:9999/toggle/", toggleJSON, "json")
+            $.post( "http://localhost:9999/toggle/", toggleJSON, "json")
               .done(function( data ) {
                 alert( "Data Loaded: " + data );
               });
@@ -285,7 +285,7 @@
 
         setInterval(function() {
             // Get queue
-            $.get('localhost:9999/status/lukoUnit', function(response) {
+            $.get('http://localhost:9999/status/lukoUnit', function(response) {
                 if (response.currentStatus == "ON") {
                     $('#status-button').text('ON');
                     $('#status-button').addClass('btn-success');
@@ -308,7 +308,7 @@
             });
 
 
-            $.get('localhost:9999/measurements/lukoUnit', function(response) {
+            $.get('http://localhost:9999/measurements/lukoUnit', function(response) {
               var normalDateLabels = [];
               var labelsCount = 0;
               response.labels.forEach(function(element) {
