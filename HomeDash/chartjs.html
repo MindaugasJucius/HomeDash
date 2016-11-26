@@ -224,31 +224,16 @@
 
     <!-- Chart.js -->
     <script>
-        jQuery["postJSON"] = function(url, data, callback) {
-            // shift arguments if data argument was omitted
-            if (jQuery.isFunction(data)) {
-                callback = data;
-                data = undefined;
-            }
-
-            return jQuery.ajax({
-                url: url,
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: data,
-                success: callback
-            });
-        };
 
         $('#toggle-button').click(function() {
-            var toggleJSON = JSON.stringify({
+            var toggleJSON = {
                 "unitId": "newId",
                 "user": userFullName
-            });
-            $.postJSON('http://homedash.cloudapp.net:9999/toggle/', toggleJSON, function(data, status, xhr) {
-                alert('Nailed it!')
-            });
+            };
+            $.post( "http://homedash.cloudapp.net:9999/toggle/", toggleJSON, "json")
+              .done(function( data ) {
+                alert( "Data Loaded: " + data );
+              });
         });
 
         Chart.defaults.global.legend = {
@@ -289,7 +274,7 @@
 
         setInterval(function() {
             // Get queue
-            $.get('http://homedash.cloudapp.net:9999/status/newId', function(response) {
+            $.get('http://homedash.cloudapp.net:9999/status/lukoUnit', function(response) {
                 if (response.currentStatus == "ON") {
                     $('#status-button').text('ON');
                     $('#status-button').addClass('btn-success');
@@ -312,12 +297,19 @@
             });
 
 
-            $.get('http://homedash.cloudapp.net:9999/measurements/newId', function(response) {
+            $.get('http://homedash.cloudapp.net:9999/measurements/lukoUnit', function(response) {
               var normalDateLabels = [];
+              var labelsCount = 0;
               response.labels.forEach(function(element) {
                   var dateOfToggleRequest = new Date(element * 1000);
                   var dateString = dateOfToggleRequest.getHours() + ":" + dateOfToggleRequest.getMinutes() + ":" + dateOfToggleRequest.getSeconds();
+                  if(labelsCount % 6 != 0) {
+                    dateString = '';
+                  }
+
                   normalDateLabels.push(dateString);
+                  labelsCount++;
+                  
                 });
               dataReceived(normalDateLabels, response.values);
             });
