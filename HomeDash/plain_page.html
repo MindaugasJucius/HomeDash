@@ -98,7 +98,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_content">
-                                    <form class="form-horizontal form-label-left" novalidate>
+                                    <form id="user-info-form" class="form-horizontal form-label-left" novalidate>
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -153,6 +153,10 @@
     <script src="../vendors/validator/validator.js"></script>
 
     <script>
+        var userInfoAvailable = false;
+        updateElementVisibility();
+        // HARDCODED DEVICES
+
         var json = [{
             "name": "Kitchen Lamp",
             "status": "on"
@@ -176,6 +180,19 @@
                 $("#available-units-table").append("<tr><td>" + nameToAppend + "</td><td>" + statusToAppend + "</td></tr>");
             }
         });
+
+        // HIDING/SHOWING
+
+        function updateElementVisibility() {
+            if (userInfoAvailable) {
+                $("#user-info-form").hide();
+                $("#available-units-table").show(300);
+            } else {
+                $("#available-units-table").hide();
+            }
+        }
+
+        // VALIDATION
 
         validator.message.date = 'not a real date';
 
@@ -207,8 +224,8 @@
         });
 
         function submitUserInfo(name) {
-
-            alert(name);
+            userInfoAvailable = true;
+            updateElementVisibility();
         }
     </script>
 </body>
