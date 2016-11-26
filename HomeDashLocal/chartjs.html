@@ -225,30 +225,6 @@
 
     <!-- Chart.js -->
    <script>
-
-$(document).ready(function(){
-    function getCookie(c_name) {
-        if(document.cookie.length > 0) {
-            c_start = document.cookie.indexOf(c_name + "=");
-            if(c_start != -1) {
-                c_start = c_start + c_name.length + 1;
-                c_end = document.cookie.indexOf(";", c_start);
-                if(c_end == -1) c_end = document.cookie.length;
-                return unescape(document.cookie.substring(c_start,c_end));
-            }
-        }
-        return "";
-    }
-
-    $(function () {
-        $.ajaxSetup({
-            headers: {
-                "X-CSRFToken": getCookie("csrftoken")
-            }
-        });
-    });
-});
-
         $('#toggle-button').click(function() {
             var toggleJSON = {
                 "unitId": "lukoUnit",
@@ -264,7 +240,7 @@ $(document).ready(function(){
                 dataType: 'json'
             });
 
-            $.post( "http://homedash.cloudapp.net:9999/toggle/", toggleJSON, "json")
+            $.post( "http://homedash.cloudapp.net/toggle/", toggleJSON, "json")
               .done(function( data ) {
                 alert( "Data Loaded: " + data );
               });
@@ -308,7 +284,7 @@ $(document).ready(function(){
 
         setInterval(function() {
             // Get queue
-            $.get('http://homedash.cloudapp.net:9999/status/lukoUnit', function(response) {
+            $.get('http://homedash.cloudapp.net/status/lukoUnit', function(response) {
                 if (response.currentStatus == "ON") {
                     $('#status-button').text('ON');
                     $('#status-button').addClass('btn-success');
@@ -331,7 +307,7 @@ $(document).ready(function(){
             });
 
 
-            $.get('http://homedash.cloudapp.net:9999/measurements/lukoUnit', function(response) {
+            $.get('http://homedash.cloudapp.net/measurements/lukoUnit', function(response) {
               var normalDateLabels = [];
               var labelsCount = 0;
               response.labels.forEach(function(element) {
