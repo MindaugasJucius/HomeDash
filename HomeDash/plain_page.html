@@ -36,11 +36,11 @@
                     <!-- menu profile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
-                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                            <img src="images/user.png" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>John Doe</h2>
+                            <h2 id="sidebar-username">User</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -73,8 +73,8 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
-                                <a href="javascript:;" class="user-profile">
-                                    <img src="images/img.jpg" alt="">John Doe
+                                <a id="topbar-username" href="javascript:;" class="user-profile">
+                                    <img src="images/img.jpg" alt="">User
                                 </a>
                             </li>
                         </ul>
@@ -88,7 +88,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Available devices</h3>
+                            <h3 id="name-input-header">Input your name</h3>
                         </div>
                     </div>
 
@@ -153,8 +153,12 @@
     <script src="../vendors/validator/validator.js"></script>
 
     <script>
+        // INITIAL STATE
+
         var userInfoAvailable = false;
+        var userFullName = "";
         updateElementVisibility();
+
         // HARDCODED DEVICES
 
         var json = [{
@@ -187,6 +191,9 @@
             if (userInfoAvailable) {
                 $("#user-info-form").hide();
                 $("#available-units-table").show(300);
+                $("#name-input-header").text("Available Devices");
+                $("#sidebar-username").text(userFullName);
+                $("#topbar-username").text(userFullName);
             } else {
                 $("#available-units-table").hide();
             }
@@ -225,6 +232,7 @@
 
         function submitUserInfo(name) {
             userInfoAvailable = true;
+            userFullName = name;
             updateElementVisibility();
         }
     </script>
