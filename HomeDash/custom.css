@@ -1,0 +1,5 @@
+.statusOn { color: #73879C; }
+.statusOn:hover {
+  background-color: #73879C !important;
+  color: white;
+}

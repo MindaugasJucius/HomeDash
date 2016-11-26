@@ -19,6 +19,7 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../HomeDash/custom.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -136,12 +137,6 @@
     <script src="../build/js/custom.min.js"></script>
 
     <script>
-        // $("#available-units-table").load("/not-here.php", function(response, status, xhr) {
-        //     if (status == "error") {
-        //         var msg = "Sorry but there was an error: ";
-        //         alert(msg);
-        //     }
-        // });
         var json = [{
             "name": "Kitchen Lamp",
             "status": "on"
@@ -150,13 +145,21 @@
             "status": "off"
         }];
         $.each(json, function(i, data) {
-            $("#available-units-table").append("<tr><td>" + data.name + "</td><td>" + data.status + "</td></tr>");
+            var nameToAppend = "";
+            var statusToAppend = "";
+            if (data.status == "on") {
+                nameToAppend = "<a href=\"chartjs.html\"><div style=\"height:100%;width:100%\">" + data.name + "</div></a>";
+                statusToAppend = "<a href=\"chartjs.html\"><div style=\"height:100%;width:100%\">" + data.status + "</div></a>";
+                $("#available-units-table").append(
+                    "<tr class=\"statusOn\"><td>" + nameToAppend +
+                    "</td><td>" + statusToAppend + "</td></tr>"
+                );
+            } else {
+                nameToAppend = data.name;
+                statusToAppend = data.status;
+                $("#available-units-table").append("<tr><td>" + nameToAppend + "</td><td>" + statusToAppend + "</td></tr>");
+            }
         })
-        setTimeout(
-            function() {
-
-
-            }, 1000);
     </script>
 </body>
 
@@ -170,6 +173,24 @@
 
 </html>
 ody>
+
+</html>
+ody>
+
+</html>
+
+</html>
+ody>
+
+</html>
+
+</html>
+ody>
+
+</html>
+l> ody>
+
+</html>
 
 </html>
 ody>
