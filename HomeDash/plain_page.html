@@ -87,7 +87,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Available rooms</h3>
+                            <h3>Available devices</h3>
                         </div>
                     </div>
 
@@ -105,23 +105,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                            </tr>
-                                            <tbody>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -158,7 +142,16 @@
         //         alert(msg);
         //     }
         // });
-        $("#available-units-table").append("<tr><td>Wigger Wobbler</td><td>System Architect</td></tr>");
+        var json = [{
+            "name": "Kitchen Lamp",
+            "status": "on"
+        }, {
+            "name": "Bathroom hairdryer",
+            "status": "off"
+        }];
+        $.each(json, function(i, data) {
+            $("#available-units-table").append("<tr><td>" + data.name + "</td><td>" + data.status + "</td></tr>");
+        })
         setTimeout(
             function() {
 
