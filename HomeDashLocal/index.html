@@ -54,7 +54,7 @@
                             <ul class="nav side-menu">
                                 <li><a href="index.html"><i class="fa fa-home"></i>Home</a>
                                 </li>
-                                <li><a href="chartjs.html"><i class="fa fa-bar-chart"></i>Usage</a>
+                                <li id="usage-bar"><a href="chartjs.html"><i class="fa fa-bar-chart"></i>Usage</a>
                                 </li>
                             </ul>
                         </div>
@@ -154,9 +154,14 @@
 
     <script>
         // INITIAL STATE
-
-        var userInfoAvailable = false;
-        var userFullName = "";
+        var currentInfo = localStorage.getItem('userFullName');
+        if (currentInfo != null) {
+            var userInfoAvailable = true;
+            var userFullName = currentInfo;
+        } else {
+            var userInfoAvailable = false;
+            var userFullName = "";
+        }
         updateElementVisibility();
 
         // HARDCODED DEVICES
@@ -194,8 +199,10 @@
                 $("#name-input-header").text("Available Devices");
                 $("#sidebar-username").text(userFullName);
                 $("#topbar-username").text(userFullName);
+                $("#usage-bar").show();
             } else {
                 $("#available-units-table").hide();
+                $("#usage-bar").hide();
             }
         }
 
@@ -238,37 +245,5 @@
         }
     </script>
 </body>
-
-</html>
-</script>
-</body>
-
-</html>
-</script>
-</body>
-
-</html>
-ody>
-
-</html>
-ody>
-
-</html>
-
-</html>
-ody>
-
-</html>
-
-</html>
-ody>
-
-</html>
-l> ody>
-
-</html>
-
-</html>
-ody>
 
 </html>
