@@ -19,6 +19,7 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../HomeDash/custom.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -87,7 +88,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Available rooms</h3>
+                            <h3>Available devices</h3>
                         </div>
                     </div>
 
@@ -105,23 +106,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                            </tr>
-                                            <tbody>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -152,18 +137,29 @@
     <script src="../build/js/custom.min.js"></script>
 
     <script>
-        // $("#available-units-table").load("/not-here.php", function(response, status, xhr) {
-        //     if (status == "error") {
-        //         var msg = "Sorry but there was an error: ";
-        //         alert(msg);
-        //     }
-        // });
-        $("#available-units-table").append("<tr><td>Wigger Wobbler</td><td>System Architect</td></tr>");
-        setTimeout(
-            function() {
-
-
-            }, 1000);
+        var json = [{
+            "name": "Kitchen Lamp",
+            "status": "on"
+        }, {
+            "name": "Bathroom hairdryer",
+            "status": "off"
+        }];
+        $.each(json, function(i, data) {
+            var nameToAppend = "";
+            var statusToAppend = "";
+            if (data.status == "on") {
+                nameToAppend = "<a href=\"chartjs.html\"><div style=\"height:100%;width:100%\">" + data.name + "</div></a>";
+                statusToAppend = "<a href=\"chartjs.html\"><div style=\"height:100%;width:100%\">" + data.status + "</div></a>";
+                $("#available-units-table").append(
+                    "<tr class=\"statusOn\"><td>" + nameToAppend +
+                    "</td><td>" + statusToAppend + "</td></tr>"
+                );
+            } else {
+                nameToAppend = data.name;
+                statusToAppend = data.status;
+                $("#available-units-table").append("<tr><td>" + nameToAppend + "</td><td>" + statusToAppend + "</td></tr>");
+            }
+        })
     </script>
 </body>
 
@@ -177,6 +173,24 @@
 
 </html>
 ody>
+
+</html>
+ody>
+
+</html>
+
+</html>
+ody>
+
+</html>
+
+</html>
+ody>
+
+</html>
+l> ody>
+
+</html>
 
 </html>
 ody>
