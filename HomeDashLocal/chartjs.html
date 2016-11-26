@@ -228,10 +228,20 @@
 
         $('#toggle-button').click(function() {
             var toggleJSON = {
-                "unitId": "newId",
+                "unitId": "lukoUnit",
                 "user": userFullName
             };
-            $.post( "http://homedash.cloudapp.net:9999/toggle/", toggleJSON, "json")
+
+            $.ajax({
+                type: 'POST',
+                url: '/form/',
+                data: '{"name":"jonas"}', // or JSON.stringify ({name: 'jonas'}),
+                success: function(data) { alert('data: ' + data); },
+                contentType: "application/json",
+                dataType: 'json'
+            });
+
+            $.post( "localhost:9999/toggle/", toggleJSON, "json")
               .done(function( data ) {
                 alert( "Data Loaded: " + data );
               });
@@ -275,7 +285,7 @@
 
         setInterval(function() {
             // Get queue
-            $.get('http://homedash.cloudapp.net:9999/status/lukoUnit', function(response) {
+            $.get('localhost:9999/status/lukoUnit', function(response) {
                 if (response.currentStatus == "ON") {
                     $('#status-button').text('ON');
                     $('#status-button').addClass('btn-success');
@@ -298,16 +308,12 @@
             });
 
 
-            $.get('http://homedash.cloudapp.net:9999/measurements/lukoUnit', function(response) {
+            $.get('localhost:9999/measurements/lukoUnit', function(response) {
               var normalDateLabels = [];
               var labelsCount = 0;
               response.labels.forEach(function(element) {
                   var dateOfToggleRequest = new Date(element * 1000);
                   var dateString = dateOfToggleRequest.getHours() + ":" + dateOfToggleRequest.getMinutes() + ":" + dateOfToggleRequest.getSeconds();
-                  if(labelsCount % 6 != 0) {
-                    dateString = '';
-                  }
-
                   normalDateLabels.push(dateString);
                   labelsCount++;
                   
