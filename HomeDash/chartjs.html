@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Chart JS Graph Examples | Gentellela Alela! by Colorlib</title>
+    <title>HomeDash | Statistics</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -224,14 +224,31 @@
 
     <!-- Chart.js -->
     <script>
-        $('#toggle-button').click(function() {
-            if ($('#status-button').text() == "On") {
-                $('#status-button').text('Off');
-                $('#status-button').removeClass('btn-success');
-            } else {
-                $('#status-button').text('On');
-                $('#status-button').addClass('btn-success');
+        jQuery["postJSON"] = function(url, data, callback) {
+            // shift arguments if data argument was omitted
+            if (jQuery.isFunction(data)) {
+                callback = data;
+                data = undefined;
             }
+
+            return jQuery.ajax({
+                url: url,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: data,
+                success: callback
+            });
+        };
+
+        $('#toggle-button').click(function() {
+            var toggleJSON = JSON.stringify({
+                "unitId": "newId",
+                "user": userFullName
+            });
+            $.postJSON('http://homedash.cloudapp.net:9999/toggle/', toggleJSON, function(data, status, xhr) {
+                alert('Nailed it!')
+            });
         });
 
         Chart.defaults.global.legend = {
